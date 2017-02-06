@@ -4,7 +4,7 @@
 Questions? Contact edmunds@ml.berkeley.edu.
 More information on my [website](http://rileyedmunds.com/2016/12/15/complex-sound/).
 
-Real-valued test model based on Karol J. Piczak's [paper](https://github.com/karoldvl/paper-2015-esc-convnet), Environmental Sound Classification with Convolutional Neural Networks.
+Credits: the real-valued cNN model is based on Karol J. Piczak's [paper](https://github.com/karoldvl/paper-2015-esc-convnet), Environmental Sound Classification with Convolutional Neural Networks.
 
 ---
 
