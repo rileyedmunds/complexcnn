@@ -2,9 +2,10 @@
 [Prepublication] Abstract: In this paper we introduce a new framework and approach for convolutional neural network computation. By introducing layer functions that intelligently process complex-domain data in deep neural network architectures, we improve upon prior understanding and performance in complex-valued convolutional neural networks. Using novel derivations of convolutional, down-sampling, non-linear, and affine layers implemented in a complex-valued counterpart to Caffe, we proved results when evaluated against real-valued models in the context of environmental sound classification. Finally, we demonstrated these results are applicable to many other fields, including, but not limited to MRI imaging, signal processing, and LiDAR mapping.
 
 Questions? Contact edmunds@ml.berkeley.edu.
-More information on my [website](http://rileyedmunds.com/2016/12/15/complex-sound/){:target="_blank"}.
+More information on my [website](http://rileyedmunds.com/2016/12/15/complex-sound/).
 
-Real-valued test model based on Karol J. Piczak's [paper](https://github.com/karoldvl/paper-2015-esc-convnet){:target="_blank"}, Environmental Sound Classification with Convolutional Neural Networks.
+Real-valued test model based on Karol J. Piczak's [paper](https://github.com/karoldvl/paper-2015-esc-convnet), Environmental Sound Classification with Convolutional Neural Networks.
+
 ---
 
 # ESC-50: Dataset for Environmental Sound Classification
