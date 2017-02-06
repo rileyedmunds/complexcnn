@@ -1,7 +1,7 @@
 ## Complex Convolutional Neural Networks for Environmental Sound Classification
 [Prepublication] Abstract: In this paper we introduce a new framework and approach for convolutional neural network computation. By introducing layer functions that intelligently process complex-domain data in deep neural network architectures, we improve upon prior understanding and performance in complex-valued convolutional neural networks. Using novel derivations of convolutional, down-sampling, non-linear, and affine layers implemented in a complex-valued counterpart to Caffe, we proved results when evaluated against real-valued models in the context of environmental sound classification. Finally, we demonstrated these results are applicable to many other fields, including, but not limited to MRI imaging, signal processing, and LiDAR mapping.
 
-For more information, please contact me at edmunds@ml.berkeley.edu
+Questions? Contact edmunds@ml.berkeley.edu.
 
 ---
 
