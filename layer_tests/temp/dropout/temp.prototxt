@@ -1,0 +1,28 @@
+layer {
+  name: "data"
+  type: "DummyData"
+  top: "data"
+  dummy_data_param {
+    shape {
+      dim: 1
+      dim: 10
+      dim: 1
+      dim: 1
+    }
+    data_filler {
+      type: "gaussian"
+      mean: 0
+      std: 1
+    }
+  }
+}
+
+layer {
+  name: "dropout"
+  type: "Dropout"
+  bottom: "data"
+  top: "dropout"
+  dropout_param {
+    dropout_ratio: .25
+  }
+}

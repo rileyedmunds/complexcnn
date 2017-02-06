@@ -1,0 +1,220 @@
+name: "Sound"
+
+
+layer {
+  name: "sound"
+  type: "HDF5Data"
+  top: "data"
+  top: "label"
+  include {
+    phase: TRAIN
+  }
+  hdf5_data_param {
+    source: "/u/vis/x1/redmunds/git/sound/environmental/data/train.txt"
+    batch_size: 1000
+  }
+}
+
+
+layer {
+  name: "sound"
+  type: "HDF5Data"
+  top: "data"
+  top: "label"
+  include {
+    phase: TEST
+  }
+
+  hdf5_data_param {
+    source: "/u/vis/x1/redmunds/git/sound/environmental/data/test.txt"
+    batch_size: 1000  #600
+  }
+}
+
+
+layer { #ComplexConvlution
+  name: "conv1"
+  type: "Convolution"
+  bottom: "data"
+  top: "conv1"
+  convolution_param {
+    num_output: 80
+    kernel_h: 57
+    kernel_w: 6
+    stride: 1
+    weight_filler {
+      type: "uniform" #will be uniform real and imag
+      min: -0.001
+      max: 0.001
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+
+
+layer {
+  name: "relu1" #cardiod
+  type: "ReLU"
+  bottom: "conv1"
+  top : "conv1"
+}
+
+
+layer {
+  name: "pool1" #complexpooling
+  type: "Pooling"
+  bottom: "conv1"
+  top: "pool1"
+  pooling_param {
+    pool: MAX
+    kernel_h: 4
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 3
+  }
+}
+
+
+
+
+layer {
+  name: "conv2"
+  type: "Convolution"
+  bottom: "pool1"
+  top: "conv2"
+  convolution_param {
+    num_output: 80
+    kernel_h: 1
+    kernel_w: 3
+    stride: 1
+    weight_filler {
+      type: "uniform"
+      min: -0.1
+      max: 0.1
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+
+
+layer {
+  name: "relu2"
+  type: "ReLU"
+  bottom: "conv2"
+  top: "conv2"
+}
+
+
+layer {
+  name: "pool2"
+  type: "Pooling"
+  bottom: "conv2"
+  top: "pool2"
+  pooling_param {
+    pool: MAX
+    kernel_h: 1
+    kernel_w: 3
+    stride_h: 1
+    stride_w: 3
+  }
+}
+
+
+layer {
+  name: "fc3"
+  type: "InnerProduct"
+  bottom: "pool2"
+  top: "fc3"
+  inner_product_param {
+    num_output: 5000
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+
+
+layer {
+  name: "relu3"
+  type: "ReLU"
+  bottom: "fc3"
+  top: "fc3"
+}
+
+
+
+
+
+layer {
+  name: "fc4"
+  type: "InnerProduct" #complexinnerproduct
+  bottom: "fc3"
+  top: "fc4"
+  inner_product_param {
+    num_output: 5000
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+
+
+layer {
+  name: "relu4"
+  type: "ReLU"
+  bottom: "fc4"
+  top: "fc4"
+}
+
+
+
+layer {
+  name: "fc5"
+  type: "InnerProduct"
+  bottom: "fc4"
+  top: "fc5"
+  inner_product_param {
+    num_output: 50
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+     #magnitude layer name type bottom top different top and bottom since one is complex and one is real
+
+layer {
+  name: "accuracy"   
+  type: "Accuracy"
+  bottom: "fc5"              #mag5
+  bottom: "label"
+  top: "accuracy"
+}
+
+layer {
+  name: "loss"         
+  type: "SoftmaxWithLoss"
+  bottom: "fc5"              #mag5
+  bottom: "label"
+  top: "loss"
+}

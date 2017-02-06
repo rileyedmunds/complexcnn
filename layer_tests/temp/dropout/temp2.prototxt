@@ -1,0 +1,74 @@
+layer {
+  name: "data"
+  type: "DummyData"
+  top: "data"
+  dummy_data_param {
+    shape {
+      dim: 1
+      dim: 10
+      dim: 1
+      dim: 1
+    }
+    data_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+
+layer {
+  name: "fc1"
+  type: "InnerProduct"
+  bottom: "data"
+  top: "fc1"
+  inner_product_param {
+    num_output: 10
+    weight_filler {
+      type: "gaussian"
+      mean: 0
+      std: 1
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+} 
+
+layer {
+  name: "dropout"
+  type: "Dropout"
+  bottom: "fc1"
+  top: "dropout"
+  dropout_param {
+    dropout_ratio: .25
+  }
+}
+
+layer {
+  name: "zeros"
+  type: "DummyData"
+  top: "zeros"
+  dummy_data_param {
+    shape {
+      dim: 1
+      dim: 10
+      dim: 1
+      dim: 1
+    }
+    data_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+
+
+layer {
+  name: "loss"
+  type: "EuclideanLoss"
+  bottom: "dropout"
+  bottom: "zeros"
+  top: "loss"
+} 
+  
